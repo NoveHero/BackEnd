@@ -54,6 +54,7 @@ func NewStory(c *fiber.Ctx, db *gorm.DB) error {
 	}
 
 	storyUUID := uuid.New().String()
+	metaDataUUID := uuid.New().String()
 
 	// Initialize a new story with the title and empty content
 	newStory := database.Story{
@@ -65,6 +66,7 @@ func NewStory(c *fiber.Ctx, db *gorm.DB) error {
 
 	// Initialize metadata for the story
 	newStoryMetaData := database.StoryMetaData{
+		UUID:         metaDataUUID,
 		Genre:        input.MetaData.Genre,
 		Setting:      input.MetaData.Setting,
 		Protagonist:  input.MetaData.Protagonist,
