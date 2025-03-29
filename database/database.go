@@ -1,22 +1,45 @@
 package database
 
 import (
-	"gorm.io/driver/sqlite" // Your preferred database driver
-	"gorm.io/gorm"
-
+	// Your preferred database driver
+	"fmt"
 	"log"
+	"os"
+
+	"gorm.io/driver/postgres" // Import the PostgreSQL driver
+	"gorm.io/gorm"
 )
 
 func InitDatabase() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("mydatabase.db"), &gorm.Config{})
+	// Retrieve environment variables
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
+
+	if host == "" {
+		host = "localhost"
+	}
+	if port == "" {
+		port = "5432"
+	}
+
+	// Construct the DSN (Data Source Name)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disabled TimeZone=UTC",
+		host, user, password, dbname, port)
+
+	// Open the database connection
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
+		log.Fatal("Failed to connect to the database:", err)
 		return nil // Return nil on error
 	}
 
+	// Run auto-migrations
 	err = db.AutoMigrate(&User{}, &Story{}, &StoryMetaData{})
 	if err != nil {
-		log.Fatal("Failed to auto-migrate database:", err)
+		log.Fatal("Failed to auto-migrate the database:", err)
 		return nil
 	}
 	return db
