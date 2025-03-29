@@ -1,0 +1,43 @@
+# Binaries
+main
+*.exe
+*.out
+*.o
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Go specific
+*.test
+*.modcache/
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Test and coverage results
+*.coverprofile
+
+# Vendor directory (if not used)
+vendor/
+
+# Git repository
+.git
+.gitignore
+
+# Docker-related
+Dockerfile
+.dockerignore
+
+# Node modules, if applicable (if you have front-end components)
+node_modules/
+
+# Ignore IDE/editor config files (if applicable)
+.vscode/
+.idea/
+.env
+
