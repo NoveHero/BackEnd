@@ -87,7 +87,7 @@ The backend is containerized using Docker for portability and ease of deployment
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/NoveHero/BackEnd.git
 cd your-repo-name
 
 # Build the Docker image
