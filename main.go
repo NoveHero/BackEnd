@@ -14,7 +14,7 @@ import (
 func main() {
 	// Initialize database
 
-	openaiClient := openai.NewClient("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")
+	openaiClient := openai.NewClient("")
 	db := database.InitDatabase()
 	if db == nil {
 		log.Fatal("Failed to connect to database")
